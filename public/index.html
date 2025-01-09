@@ -9,7 +9,7 @@
         <div class='main_container'>
         <div class='dashboard_container'>
             <div class='logo_container'>
-                <img src='./utils/images/logo.png'>
+                <img width="120" src='./utils/images/logo.png'>
             </div>
             <div>
                 <div class='description_container'>
@@ -45,29 +45,29 @@
                         </button>
                     </div>
                 </div>
-                <div class='stranger_connecting_container'>
-                    <p class='stranger_title_container'>Stranger</p>
-                    <div class='stranger_buttons_container'>
-                        <button class='connecting_button' id='stranger_chat_button'>
+                <div class='lurker_connecting_container'>
+                    <p class='lurker_title_container'>Lurker</p>
+                    <div class='lurker_buttons_container'>
+                        <button class='connecting_button' id='lurker_chat_button'>
                             <img src='/utils/images/chatButton.png' class='connecting_buttons_image'>
                         </button>
-                        <button class='connecting_button' id='stranger_video_button'>
+                        <button class='connecting_button' id='lurker_video_button'>
                             <img src='/utils/images/videoButton.png' class='connecting_buttons_image'>
                         </button>
                     </div>
                 </div>
                 <div class='checkbox_container'>
-                    <div class='checkbox_connection' id='allow_strangers_checkbox'>
-                        <img id='allow_strangers_checkbox_image' class='' src='./utils/images/check.png'>
+                    <div class='checkbox_connection' id='allow_lurkers_checkbox'>
+                        <img id='allow_lurkers_checkbox_image' class='' src='./utils/images/check.png'>
                     </div>
-                    <p class='checkbox_container_paragraph'>Allow connection from strangers</p>
+                    <p class='checkbox_container_paragraph'>Allow connection from lurkers</p>
                 </div>
                 <div class='dashboard_blur display_none' id='dashboard_blur'></div>
             </div>
         <div class='call_container'>
             <div class='videos_container'>
                 <div id='video_placeholder' class='videos_placeholder'>
-                    <img src='./utils/images/logo.png'>
+                    <img width="300" src='./utils/images/logo.png'>
                 </div>
                 <video class='remote_video display_none' autoplay id='remote_video'></video>
                 <div class='local_video_container'>
@@ -120,5 +120,6 @@
         </div>
         <script src='/socket.io/socket.io.js'></script>
         <script src='./js/main.js' type='module'></script>
+        <script src='./js/store.js' type='module'></script>
     </body>
 </html>

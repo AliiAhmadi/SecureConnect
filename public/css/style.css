@@ -165,18 +165,18 @@ button {
     transition: 0.5s;
   }
   
-  .stranger_connecting_container {
+  .lurker_connecting_container {
     display: flex;
     flex-direction: column;
     margin: 0 40px;
   }
   
-  .stranger_title_container {
+  .lurker_title_container {
     font-weight: 500;
     font-size: 18px;
   }
   
-  .stranger_buttons_container {
+  .lurker_buttons_container {
     display: flex;
     justify-content: space-between;
   }
