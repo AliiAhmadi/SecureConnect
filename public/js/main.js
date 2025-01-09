@@ -1,5 +1,7 @@
 import * as store from "./store.js";
 import * as wss from "./wss.js";
+import * as rtc from "./webRTCHandler.js";
+import * as constant from "./constants.js";
 
 const socket = io("/");
 wss.registerSocketEvents(socket);
@@ -16,9 +18,15 @@ const personalCodeChatButton = document.getElementById("personal_code_chat_butto
 const personalCodeVideoButton = document.getElementById("personal_code_video_button");
 
 personalCodeChatButton.addEventListener("click", (e) => {
-    console.log("chat started");
+
+    const calleePersonalCode = document.getElementById("personal_code_input").value;
+    const type = constant.callType.CHAT_PERSONAL_CODE;
+    rtc.sendPreOffer(calleePersonalCode, type);
 });
 
 personalCodeVideoButton.addEventListener("click", (e) => {
-    console.log("video started");
+
+    const calleePersonalCode = document.getElementById("personal_code_input").value;
+    const type = constant.callType.VIDEO_PERSONAL_CODE;
+    rtc.sendPreOffer(calleePersonalCode, type);
 });

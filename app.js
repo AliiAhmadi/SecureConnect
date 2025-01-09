@@ -16,7 +16,10 @@ let connectedPeers = [];
 
 io.on("connection", (socket) => {
     connectedPeers.push(socket.id);
-    console.log(connectedPeers);
+
+    socket.on("pre-offer", (data) => {
+        console.log(data);
+    });
 
     socket.on("disconnect", () => {
         const newConnectedPeers = connectedPeers.filter((peerSocketId) => {
