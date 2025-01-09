@@ -15,6 +15,10 @@ export const registerSocketEvents = (socket) => {
     socket.on("pre-offer", (data) => {
         rtc.handlePreOffer(data);
     });
+    
+    socket.on("pre-offer-answer", (data) => {
+        rtc.handlePreOfferAnswer(data);
+    });
 };
 
 export const sendPreOffer = (data) => {

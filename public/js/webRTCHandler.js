@@ -53,10 +53,39 @@ const sendPreOfferAnswer = (preOfferAnswer) => {
         preOfferAnswer: preOfferAnswer,
     };
     
+    ui.removeAllDialogs();
     wss.sendPreOfferAnswer(data);
 };
 
 
+export const handlePreOfferAnswer = (data) => {
+    const { preOfferAnswer } = data;
+
+    ui.removeAllDialogs();
+
+    if(preOfferAnswer === constants.preOfferAnswer.CALLEE_NOT_FOUND) {
+        // show not found
+        ui.showInfoDialog(preOfferAnswer);
+    }
+
+    if(preOfferAnswer === constants.preOfferAnswer.CALL_UNAVAILABLE) {
+        // show can not connect
+        ui.showInfoDialog(preOfferAnswer);
+    }
+
+    if(preOfferAnswer === constants.preOfferAnswer.CALL_REJECTED) {
+        // show call rejected
+        ui.showInfoDialog(preOfferAnswer);
+    }
+
+    if(preOfferAnswer === constants.preOfferAnswer.CALL_ACCEPTED) {
+        // send webRTC offer
+        console.log("call accepted");
+    }
+};
+
 const callingDialogRejectCallHandler = () => {
     console.log("rejecting the call");
 };
+
+

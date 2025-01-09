@@ -18,7 +18,13 @@ io.on("connection", (socket) => {
     connectedPeers.push(socket.id);
 
     socket.on("pre-offer-answer", (data) => {
-        console.log(data);
+        const connectedPeer = connectedPeers.find((peerSocketId) => {
+            return peerSocketId === data.callerSocketId;
+        });
+
+        if(connectedPeer) {
+            io.to(data.callerSocketId).emit("pre-offer-answer", data);
+        }
     });
 
     socket.on("pre-offer", (data) => {
