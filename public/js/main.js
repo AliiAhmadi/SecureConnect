@@ -10,3 +10,15 @@ personalCodeCopyButton.addEventListener("click", (e) => {
     const code = store.getState().socketId;
     navigator.clipboard && navigator.clipboard.writeText(code);
 });
+
+
+const personalCodeChatButton = document.getElementById("personal_code_chat_button");
+const personalCodeVideoButton = document.getElementById("personal_code_video_button");
+
+personalCodeChatButton.addEventListener("click", (e) => {
+    console.log("chat started");
+});
+
+personalCodeVideoButton.addEventListener("click", (e) => {
+    console.log("video started");
+});
