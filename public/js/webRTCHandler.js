@@ -24,8 +24,11 @@ const createPeerConnection = () => {
 
     peerConnection.onicecandidate = (event) => {
         if(event.candidate) {
-            // to other side
-            console.log("okkkk");
+            wss.sendDataUsingWebRTCSignaling({
+                connectedUserSocketId: connectedUserDetails.socketId,
+                type: constants.webRTCSignaling.ICE_CANDIDATE,
+                candidate: event.candidate,
+            });
         }
     };
 
@@ -61,7 +64,9 @@ export const getLocalPreview = () => {
             ui.updateLocalVideo(stream);
             store.setLocalStream(stream);
         }).catch((err) => {
-            console.log("access error");
+            console.error("Access error");
+            console.log(err.name);
+            console.log(err.message);
         });
 };
 
@@ -160,9 +165,30 @@ const sendWebRTCOffer = async () => {
     });
 };
 
-export const handleWebRTCOffer = (data) => {
-    console.log("webRTC offer got.");
-    console.log(data);
+export const handleWebRTCOffer = async (data) => {
+    await peerConnection.setRemoteDescription(data.offer);
+    const answer = await peerConnection.createAnswer();
+
+    await peerConnection.setLocalDescription(answer);
+    wss.sendDataUsingWebRTCSignaling({
+        connectedUserSocketId: connectedUserDetails.socketId,
+        type: constants.webRTCSignaling.ANSWER,
+        answer: answer,
+    });
+};
+
+export const handleWebRTCAnswer = async (data) => {
+    await peerConnection.setRemoteDescription(data.answer);
+
+};
+
+export const handleWebRTCCandidate = async (data) => {
+    console.log("webrtc candidate handling");
+    try {
+        await peerConnection.addIceCandidate(data.candidate);
+    }catch(err) {
+        console.log("error in handling ice candidate", err);
+    }
 };
 
 const callingDialogRejectCallHandler = () => {

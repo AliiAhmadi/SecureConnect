@@ -138,3 +138,19 @@ export const showCallElements = (callType) => {
         showVideoCallElements();
     }
 };
+
+const micOnImageSrc = "./utils/images/mic.png";
+const micOffImageSrc = "./utils/images/micOff.png";
+
+export const updateMicButton = (micEnabled) => {
+    const micButtonImage = document.getElementById("mic_button_image");
+    micButtonImage.src = micEnabled ? micOffImageSrc : micOnImageSrc;
+};
+
+const cameraOnImageSrc = "./utils/images/camera.png";
+const cameraOffImageSrc = "./utils/images/cameraOff.png";
+
+export const updateCameraButton = (cameraEnabled) =>{
+    const cameraButtonImage = document.getElementById("camera_button_image");
+    cameraButtonImage.src = cameraEnabled ? cameraOffImageSrc : cameraOnImageSrc;
+};

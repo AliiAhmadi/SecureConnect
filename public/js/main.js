@@ -31,3 +31,12 @@ personalCodeVideoButton.addEventListener("click", (e) => {
     const type = constant.callType.VIDEO_PERSONAL_CODE;
     rtc.sendPreOffer(calleePersonalCode, type);
 });
+
+
+const micButton = document.getElementById("mic_button");
+micButton.addEventListener("click", (e) => {
+    const localStream = store.getState().localStream;
+    const micEnabled = localStream.getAudioTracks()[0].enabled;
+    localStream.getAudioTracks()[0].enabled = !micEnabled;
+    ui.updateMicButton(micEnabled);
+});
