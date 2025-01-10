@@ -50,3 +50,11 @@ cameraButton.addEventListener("click", (e) => {
     ui.updateCameraButton(cameraEnabled);
 
 });
+
+
+const switchForScreenSharingButton = document.getElementById("screen_sharing_button");
+switchForScreenSharingButton.addEventListener("click", (e) => {
+    const screenSharingActive = store.getState().screenSharingActive;
+    rtc.switchBetweenCameraAndScreenSharing(screenSharingActive);
+});
+
