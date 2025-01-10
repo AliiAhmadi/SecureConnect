@@ -150,7 +150,7 @@ export const updateMicButton = (micEnabled) => {
 const cameraOnImageSrc = "./utils/images/camera.png";
 const cameraOffImageSrc = "./utils/images/cameraOff.png";
 
-export const updateCameraButton = (cameraEnabled) =>{
+export const updateCameraButton = (cameraEnabled) => {
     const cameraButtonImage = document.getElementById("camera_button_image");
     cameraButtonImage.src = cameraEnabled ? cameraOffImageSrc : cameraOnImageSrc;
 };

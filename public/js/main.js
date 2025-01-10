@@ -2,6 +2,7 @@ import * as store from "./store.js";
 import * as wss from "./wss.js";
 import * as rtc from "./webRTCHandler.js";
 import * as constant from "./constants.js";
+import * as ui from "./ui.js";
 
 const socket = io("/");
 wss.registerSocketEvents(socket);
@@ -39,4 +40,13 @@ micButton.addEventListener("click", (e) => {
     const micEnabled = localStream.getAudioTracks()[0].enabled;
     localStream.getAudioTracks()[0].enabled = !micEnabled;
     ui.updateMicButton(micEnabled);
+});
+
+const cameraButton = document.getElementById("camera_button");
+cameraButton.addEventListener("click", (e) => {
+    const localStream = store.getState().localStream;
+    const cameraEnabled = localStream.getVideoTracks()[0].enabled;
+    localStream.getVideoTracks()[0].enabled = !cameraEnabled;
+    ui.updateCameraButton(cameraEnabled);
+
 });
