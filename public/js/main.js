@@ -6,6 +6,7 @@ import * as constant from "./constants.js";
 const socket = io("/");
 wss.registerSocketEvents(socket);
 
+rtc.getLocalPreview();
 
 const personalCodeCopyButton = document.getElementById("personal_code_copy_button");
 personalCodeCopyButton.addEventListener("click", (e) => {
