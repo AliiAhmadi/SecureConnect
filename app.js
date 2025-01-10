@@ -27,6 +27,17 @@ io.on("connection", (socket) => {
         }
     });
 
+    socket.on("webRTC-signaling", (data) => {
+        const { connectedUserSocketId } = data;
+        const connectedPeer = connectedPeers.find((peerSocketId) => {
+            return peerSocketId === connectedUserSocketId;
+        });
+
+        if(connectedPeer) {
+            io.to(connectedUserSocketId).emit("webRTC-signaling", data);
+        }
+    });
+
     socket.on("pre-offer", (data) => {
         const { calleePersonalCode, type } = data;
 
