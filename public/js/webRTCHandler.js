@@ -5,6 +5,7 @@ import * as store from "./store.js";
 
 let connectedUserDetails;
 let peerConnection;
+let dataChannel;
 
 const defaultConstraints = {
     audio: true,
@@ -21,6 +22,19 @@ const configuration = {
 
 const createPeerConnection = () => {
     peerConnection = new RTCPeerConnection(configuration);
+    dataChannel = peerConnection.createDataChannel("chat");
+
+    peerConnection.ondatachannel = (event) => {
+        const dataChannel = event.channel;
+
+        dataChannel.onopen = () => {
+        };
+
+        dataChannel.onmessage = (event) => {
+            const message = JSON.parse(event.data);
+            ui.appendMessage(message);
+        };
+    };
 
     peerConnection.onicecandidate = (event) => {
         if(event.candidate) {
@@ -34,7 +48,6 @@ const createPeerConnection = () => {
 
     peerConnection.onconnectionstatechange = (event) => {
         if(peerConnection.connectionState === "connected") {
-            console.log("connected to other peer");
         }
     };
 
@@ -56,6 +69,11 @@ const createPeerConnection = () => {
             peerConnection.addTrack(track, localStream);
         }
     }
+};
+
+export const sendMessageUsingDataChannel = (message) => {
+    const stringifiedMessage = JSON.stringify(message);
+    dataChannel.send(stringifiedMessage);
 };
 
 export const getLocalPreview = () => {
@@ -183,7 +201,6 @@ export const handleWebRTCAnswer = async (data) => {
 };
 
 export const handleWebRTCCandidate = async (data) => {
-    console.log("webrtc candidate handling");
     try {
         await peerConnection.addIceCandidate(data.candidate);
     }catch(err) {
@@ -192,7 +209,7 @@ export const handleWebRTCCandidate = async (data) => {
 };
 
 const callingDialogRejectCallHandler = () => {
-    console.log("rejecting the call");
+    
 };
 
 

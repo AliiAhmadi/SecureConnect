@@ -154,3 +154,49 @@ export const updateCameraButton = (cameraEnabled) => {
     const cameraButtonImage = document.getElementById("camera_button_image");
     cameraButtonImage.src = cameraEnabled ? cameraOffImageSrc : cameraOnImageSrc;
 };
+
+export const appendMessage = (message, right = false) => {
+    const messagesContainer = document.getElementById("messages_container");
+    const messageElement = right
+      ? elements.getRightMessage(message)
+      : elements.getLeftMessage(message);
+    messagesContainer.appendChild(messageElement);
+};
+
+export const clearMessenger = () => {
+    const messagesContainer = document.getElementById("messages_container");
+    messagesContainer.querySelectorAll("*").forEach((n) => n.remove());
+};
+
+export const showRecordingPanel = () => {
+    const recordingButtons = document.getElementById("video_recording_buttons");
+    showElement(recordingButtons);
+  
+    const startRecordingButton = document.getElementById(
+      "start_recording_button"
+    );
+    hideElement(startRecordingButton);
+};
+
+export const resetRecordingButtons = () => {
+    const startRecordingButton = document.getElementById(
+      "start_recording_button"
+    );
+    const recordingButtons = document.getElementById("video_recording_buttons");
+  
+    hideElement(recordingButtons);
+    showElement(startRecordingButton);
+};
+
+export const switchRecordingButtons = (switchR = false) =>{
+    const resumeButton = document.getElementById("resume_recording_button");
+    const pauseButton = document.getElementById("pause_recording_button");
+
+    if(switchR) {
+        hideElement(pauseButton);
+        showElement(resumeButton);
+    } else {
+        hideElement(resumeButton);
+        showElement(pauseButton);
+    }
+};
