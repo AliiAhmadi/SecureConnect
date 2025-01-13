@@ -106,3 +106,13 @@ resumeRecordingButton.addEventListener("click", (e) => {
     recording.resumeRecording();
     ui.switchRecordingButtons();
 });
+
+const hangUpButton = document.getElementById("hang_up_button");
+hangUpButton.addEventListener("click", (e) => {
+    rtc.handleHangUp();
+});
+
+const hangUpChatButton = document.getElementById("finish_chat_call_button");
+hangUpChatButton.addEventListener("click", (e) => {
+    rtc.handleHangUp();
+});

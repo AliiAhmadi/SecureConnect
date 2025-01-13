@@ -1,5 +1,6 @@
 import * as constants from "./constants.js";
 import * as elements from "./elements.js";
+import * as store from "./store.js";
 
 export const updatePersonalCode = (personalCode) => {
     const personalCodeParagraph = document.getElementById("personal_code_paragraph");
@@ -199,4 +200,45 @@ export const switchRecordingButtons = (switchR = false) =>{
         hideElement(resumeButton);
         showElement(pauseButton);
     }
+};
+
+export const updateUiAfterHangUp = (type) => {
+    enableDashboard();
+
+    if(
+            type === constants.callType.VIDEO_PERSONAL_CODE ||
+            type === constants.callType.VIDEO_LURKERS
+    ) {
+        const callButtons = document.getElementById("call_buttons");
+
+        hideElement(callButtons);
+    } else {
+        const chatCallButtons = document.getElementById("finish_chat_button_container");
+        hideElement(chatCallButtons);
+    }
+
+
+    const newMessageInput = document.getElementById("new_message");
+    hideElement(newMessageInput);
+    clearMessenger();
+
+    updateMicButton(false);
+    updateCameraButton(false);
+
+    const remoteVideo = document.getElementById("remote_video");
+    hideElement(remoteVideo);
+
+
+    const placehodler = document.getElementById("video_placeholder");
+    showElement(placehodler);
+
+    removeAllDialogs();
+};
+
+export const showVideoCallButtons = () => {
+    const personalCodeVideoButton = document.getElementById("personal_code_video_button");
+    const lurkerVideoButton = document.getElementById("lurker_video_button");
+
+    showElement(personalCodeVideoButton);
+    showElement(lurkerVideoButton);
 };
