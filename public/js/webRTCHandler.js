@@ -112,7 +112,7 @@ export const handlePreOffer = (data) => {
 
     
     if(!checkCallPossiblity()) {
-        return sendPreOfferAnswer(constants.preOfferAnswer.CALL_UNAVAILABLE);
+        return sendPreOfferAnswer(constants.preOfferAnswer.CALL_UNAVAILABLE, callerSocketId);
     }
     
     connectedUserDetails = {
@@ -138,14 +138,17 @@ const acceptCallHandler = () => {
 };
 
 const rejectCallHandler = () => {
+    setIncomingCallsAvailable();
     sendPreOfferAnswer(constants.preOfferAnswer.CALL_REJECTED);
 };
 
 
 
-const sendPreOfferAnswer = (preOfferAnswer) => {
+const sendPreOfferAnswer = (preOfferAnswer, callerSocketId = null) => {
+    const callerSocketId2 = callerSocketId ? callerSocketId : connectedUserDetails.socketId;
+
     const data = {
-        callerSocketId: connectedUserDetails.socketId,
+        callerSocketId: callerSocketId2,
         preOfferAnswer: preOfferAnswer,
     };
     
@@ -222,7 +225,13 @@ export const handleWebRTCCandidate = async (data) => {
 };
 
 const callingDialogRejectCallHandler = () => {
-    
+    const data = {
+        connectedUserSocketId: connectedUserDetails.socketId,
+
+    };
+
+    closePeerConnectionAndResetState();
+    wss.sendUserHangUp(data);
 };
 
 

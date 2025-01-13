@@ -43,7 +43,7 @@ button {
   .dashboard_container {
     width: 25%;
     height: 100%;
-    background: linear-gradient(168.68deg, #0052c9 1.12%, #0a91db 100%);
+    background: linear-gradient(168.68deg, #4e4f52 1.12%, #000000 100%);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -262,7 +262,7 @@ button {
   }
   
   .message_right_paragraph {
-    background: linear-gradient(168.68deg, #0052c9 1.12%, #0a91db 100%);
+    background: linear-gradient(168.68deg, #4e4f52 1.12%, #000000 100%);
     border: 1px solid #d5deeb;
     border-radius: 8px 8px 8px 0px;
     padding: 20px 13px;
@@ -292,7 +292,7 @@ button {
     height: calc(100% - 70px);
     margin: 30px 40px 40px 40px;
     border-radius: 15px;
-    background: linear-gradient(168.68deg, #0052c9 1.12%, #0a91db 100%);
+    background: linear-gradient(168.68deg, #4e4f52 1.12%, #000000 100%);
     /* background-image: url('../utils/images/logo.png'); */
   }
   
@@ -400,7 +400,7 @@ button {
     width: 275px;
     height: 275px;
     border-radius: 275px;
-    background: linear-gradient(168.68deg, #0052c9 1.12%, #0a91db 100%);
+    background: linear-gradient(168.68deg, #4e4f52 1.12%, #000000 100%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -476,3 +476,305 @@ button {
     display: none;
   }
   
+
+
+  /*  */
+
+
+
+  /* Dark mode styles */
+body {
+  background-color: #121212; /* Dark background */
+  color: #e0e0e0; /* Light text color */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.main_container {
+  padding: 20px;
+}
+
+.dashboard_container {
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.description_container_paragraph,
+.personal_code_title_paragraph,
+.personal_code_connecting_paragraph,
+.checkbox_container_paragraph,
+.lurker_title_container {
+  color: #e0e0e0;
+}
+
+.personal_code_container,
+.personal_code_connecting_container,
+.lurker_connecting_container {
+  background-color: #252525;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.personal_code_copy_button,
+.connecting_button,
+.checkbox_connection {
+  background-color: #333;
+  border: none;
+  border-radius: 4px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.personal_code_copy_button:hover,
+.connecting_button:hover,
+.checkbox_connection:hover {
+  background-color: #444;
+}
+
+.personal_code_input,
+.new_message_input {
+  width: 100%;
+  background-color: #333;
+  border: 1px solid #555;
+  border-radius: 4px;
+  color: #e0e0e0;
+  padding: 8px;
+}
+
+.personal_code_input::placeholder,
+.new_message_input::placeholder {
+  color: #888;
+}
+
+.send_message_button,
+.call_button_small,
+.call_button_large {
+  background-color: #444;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.send_message_button_image,
+.connecting_buttons_image {
+  filter: invert(1);
+}
+
+.messenger_container {
+  background-color: #1e1e1e;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.messages_container {
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: #252525;
+  border-radius: 8px;
+  padding: 10px;
+  color: #ccc;
+}
+
+.messages_container p {
+  margin: 5px 0;
+}
+
+.new_message_container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Video section */
+.videos_container {
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.videos_placeholder img {
+  filter: invert(1);
+}
+
+.call_buttons_container button img,
+.video_recording_buttons_container button img {
+  filter: invert(1);
+}
+
+
+
+/*  */
+/*  */
+/*  */
+
+
+button {
+  background: transparent;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  text-shadow: 0px 0px 0px transparent;
+}
+
+button:hover {
+  opacity: 0.5;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  text-shadow: 0px 0px 0px transparent;
+}
+
+button:active {
+  outline: none;
+  border: none;
+}
+
+button:focus {
+  outline: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+  background-color: #121212; /* Dark background */
+  font-family: "Montserrat", sans-serif;
+}
+
+.main_container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard_container {
+  width: 25%;
+  height: 100%;
+  background: #1e1e1e; /* Darker gray for the dashboard */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.call_container {
+  width: 50%;
+  height: 100%;
+}
+
+.messenger_container {
+  width: 25%;
+  height: 100%;
+  background: #181818; /* Slightly lighter gray */
+  display: flex;
+  flex-direction: column;
+}
+
+.logo_container {
+  margin-left: 40px;
+  width: 180px;
+  height: 120px;
+}
+
+.description_container {
+  margin: 0 40px;
+}
+
+.description_container_paragraph {
+  font-weight: 500;
+  font-size: 16px;
+  color: #bbbbbb; /* Light gray for description text */
+}
+
+.personal_code_container {
+  height: 110px;
+  margin: 0 40px;
+  background: rgba(50, 50, 50, 0.5);
+  backdrop-filter: blur(80px);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.personal_code_title_paragraph,
+.personal_code_value_paragraph,
+.personal_code_connecting_paragraph,
+.lurker_title_container {
+  color: #ffffff;
+}
+
+.personal_code_input {
+  background: rgba(70, 70, 70, 0.7); /* Dark input field */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.connecting_button {
+  background: #292929; /* Dark button */
+  color: #ffffff;
+}
+
+.message_left_paragraph {
+  background: #2c2c2c;
+  color: #dddddd; /* Light gray */
+}
+
+.message_right_paragraph {
+  background: #444444;
+  color: #ffffff;
+}
+
+.new_message_input {
+  background: #232323;
+  border: 1px solid #333333;
+  color: #ffffff;
+}
+
+.videos_container {
+  background: #181818; /* Darker background for video */
+}
+
+.local_video_container {
+  background: rgba(50, 50, 50, 0.7);
+}
+
+.dialog_content {
+  background: #282828;
+}
+
+.dialog_title,
+.dialog_description {
+  color: #ffffff;
+}
+
+.dialog_accept_call_button {
+  background: linear-gradient(180deg, #009922 0%, #00bb33 100%);
+}
+
+.dialog_reject_call_button {
+  background: linear-gradient(180deg, #bb0000 0%, #ff4444 100%);
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Disables scrolling */
+}
