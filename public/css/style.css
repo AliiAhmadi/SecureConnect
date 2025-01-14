@@ -276,7 +276,7 @@ button {
     position: absolute;
     right: 50px;
     top: 10px;
-    box-shadow: 0px 2px 20px 5px rgba(10, 145, 219, 0.05);
+    box-shadow: 0px 2px 20px 5px rgba(0, 0, 0, 0.05);
     background: linear-gradient(180deg, #ff9519 0%, #ffba6a 100%);
     border-radius: 8px;
     transition: 0.5s;
@@ -551,14 +551,6 @@ body {
   color: #888;
 }
 
-.send_message_button,
-.call_button_small,
-.call_button_large {
-  background-color: #444;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-}
 
 .send_message_button_image,
 .connecting_buttons_image {

@@ -131,11 +131,11 @@ const showVideoCallElements = () => {
 };
 
 export const showCallElements = (callType) => {
-    if(callType === constants.callType.CHAT_PERSONAL_CODE) {
+    if(callType === constants.callType.CHAT_PERSONAL_CODE || callType === constants.callType.CHAT_LURKERS) {
         showChatCallElements();
     }
 
-    if(callType === constants.callType.VIDEO_PERSONAL_CODE) {
+    if(callType === constants.callType.VIDEO_PERSONAL_CODE || callType === constants.callType.VIDEO_LURKERS) {
         showVideoCallElements();
     }
 };
@@ -241,4 +241,23 @@ export const showVideoCallButtons = () => {
 
     showElement(personalCodeVideoButton);
     showElement(lurkerVideoButton);
+};
+
+export const updateLurkerCheckBox = (allowConnections) => {
+    const checkboxCheckImage = document.getElementById("allow_lurkers_checkbox_image");
+
+    allowConnections ? showElement(checkboxCheckImage) : hideElement(checkboxCheckImage);
+};
+
+export const showNotLurkerAvailableDialog = () => {
+    const infoDialog = elements.getInfoDialog("No lurker available", "please try again later...");
+
+    if(infoDialog) {
+        const dialog = document.getElementById("dialog");
+        dialog.appendChild(infoDialog);
+
+        setTimeout(() => {
+            removeAllDialogs();
+        }, [4000]);
+    }
 };

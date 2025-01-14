@@ -2,6 +2,7 @@ import * as store from "./store.js";
 import * as ui from "./ui.js";
 import * as rtc from "./webRTCHandler.js";
 import * as constants from "./constants.js";
+import * as utils from "./utils.js";
 
 let socketIO = null;
 
@@ -40,6 +41,10 @@ export const registerSocketEvents = (socket) => {
                 return;
         }
     });
+
+    socket.on("lurker-socket-id", (data) => {
+        utils.connectWithLurker(data);
+    });
 };
 
 export const sendPreOffer = (data) => {
@@ -57,4 +62,12 @@ export const sendDataUsingWebRTCSignaling = (data) => {
 
 export const sendUserHangUp = (data) => {
     socketIO.emit("user-hanged-up", data);
+};
+
+export const changeLurkerConnectionStatus = (data) => {
+    socketIO.emit("lurker-connection-status", data);
+};
+
+export const getLurkerSocketId = () => {
+    socketIO.emit("get-lurker-socket-id");
 };

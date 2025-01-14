@@ -13,6 +13,7 @@ app.get("/", (req, res) => {
 });
 
 let connectedPeers = [];
+let connectedPeersLurkers = [];
 
 io.on("connection", (socket) => {
     connectedPeers.push(socket.id);
@@ -51,6 +52,39 @@ io.on("connection", (socket) => {
 
     });
 
+    socket.on("lurker-connection-status", (data) => {
+        const { status } = data;
+
+        if(status) {
+            connectedPeersLurkers.push(socket.id);
+        } else {
+            const newConnectedPeersLurkers = connectedPeersLurkers.filter((peerSocketId) => {
+                return peerSocketId !== socket.id;
+            });
+
+            connectedPeersLurkers = newConnectedPeersLurkers;
+        }
+    });
+
+    socket.on("get-lurker-socket-id", () => {
+        let randomLurkerSocketId;
+        const filteredConnectedPeersLurkers = connectedPeersLurkers.filter((peerSocketId) => {
+            return peerSocketId !== socket.id;
+        });
+
+        if(filteredConnectedPeersLurkers.length > 0) {
+            randomLurkerSocketId = filteredConnectedPeersLurkers[Math.floor(Math.random() * filteredConnectedPeersLurkers.length)];
+        } else {
+            randomLurkerSocketId = null;
+        }
+
+        const data = {
+            randomLurkerSocketId,
+        };
+
+        io.to(socket.id).emit("lurker-socket-id", data);
+    });
+
     socket.on("pre-offer", (data) => {
         const { calleePersonalCode, type } = data;
 
@@ -79,6 +113,11 @@ io.on("connection", (socket) => {
         });
 
         connectedPeers = newConnectedPeers;
+
+        const newConnectedPeersLurkers = connectedPeersLurkers.filter((peerSocketId) => {
+            return peerSocketId !== socket.id;
+        });
+        connectedPeersLurkers = newConnectedPeersLurkers;
     });
 });
 

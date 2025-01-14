@@ -4,6 +4,7 @@ import * as rtc from "./webRTCHandler.js";
 import * as constant from "./constants.js";
 import * as ui from "./ui.js";
 import * as recording from "./recording.js";
+import * as utils from "./utils.js";
 
 const socket = io("/");
 wss.registerSocketEvents(socket);
@@ -34,6 +35,25 @@ personalCodeVideoButton.addEventListener("click", (e) => {
     rtc.sendPreOffer(calleePersonalCode, type);
 });
 
+const lurkerChatButton = document.getElementById("lurker_chat_button");
+const lurkerVideoButton = document.getElementById("lurker_video_button");
+
+lurkerChatButton.addEventListener("click", (e) => {
+    utils.getLurkerSocketIdAndConnect(constant.callType.CHAT_LURKERS);
+});
+
+lurkerVideoButton.addEventListener("click", (e) => {
+    utils.getLurkerSocketIdAndConnect(constant.callType.VIDEO_LURKERS);
+});
+
+
+const checkbox = document.getElementById("allow_lurkers_checkbox");
+checkbox.addEventListener("click", (e) => {
+    const checkboxState = store.getState().allowConnectionsFromLurkers;
+    ui.updateLurkerCheckBox(!checkboxState);
+    store.setAllowConnectionsFromLurkers(!checkboxState);
+    utils.changeLurkerConnectionStatus(!checkboxState);
+});
 
 const micButton = document.getElementById("mic_button");
 micButton.addEventListener("click", (e) => {

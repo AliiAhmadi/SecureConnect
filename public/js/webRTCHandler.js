@@ -61,7 +61,10 @@ const createPeerConnection = () => {
         remoteStream.addTrack(event.track);
     };
 
-    if(connectedUserDetails.type === constants.callType.VIDEO_PERSONAL_CODE) {
+    if(
+        connectedUserDetails.type === constants.callType.VIDEO_PERSONAL_CODE ||
+        connectedUserDetails.type === constants.callType.VIDEO_LURKERS
+    ) {
         const localStream = store.getState().localStream;
 
 
@@ -91,6 +94,7 @@ export const getLocalPreview = () => {
 };
 
 export const sendPreOffer = (calleePersonalCode, type) => {
+
     connectedUserDetails = {
         type,
         socketId: calleePersonalCode,
@@ -102,6 +106,16 @@ export const sendPreOffer = (calleePersonalCode, type) => {
             calleePersonalCode,
         };
         ui.showCallingDialog(callingDialogRejectCallHandler);
+        store.setCallState(constants.callState.CALL_UNAVAILABLE);
+        wss.sendPreOffer(data);
+    }
+
+    if(type === constants.callType.CHAT_LURKERS || type === constants.callType.VIDEO_LURKERS) {
+        const data = {
+            type,
+            calleePersonalCode,
+        };
+
         store.setCallState(constants.callState.CALL_UNAVAILABLE);
         wss.sendPreOffer(data);
     }
@@ -127,6 +141,12 @@ export const handlePreOffer = (data) => {
         type === constants.callType.VIDEO_PERSONAL_CODE
     ) {
         ui.showIncomingCallDialog(type, acceptCallHandler, rejectCallHandler);
+    }
+
+    if(type === constants.callType.CHAT_LURKERS || type === constants.callType.VIDEO_LURKERS) {
+        createPeerConnection();
+        sendPreOfferAnswer(constants.preOfferAnswer.CALL_ACCEPTED);
+        ui.showCallElements(connectedUserDetails.type);
     }
 };
 
