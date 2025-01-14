@@ -30,3 +30,17 @@
 و اما همانطور که گفتیم بعضی مواقع ممکن است این ارتباط برقرار نشود به همین دلیل از TURN استفاده می کنیم.
 
 ![image](https://github.com/user-attachments/assets/476ba4be-7d7e-470e-abea-13b35c3a7200)
+
+
+
+```
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -keyout server.key \
+    -out server.crt
+```
+
+```
+sudo mkdir /etc/ssl/self-signed
+sudo mv server.key /etc/ssl/self-signed/
+sudo mv server.crt /etc/ssl/self-signed/
+```
