@@ -1,5 +1,8 @@
 # SecureConnect
 
+![IMG_20250412_182248](https://github.com/user-attachments/assets/8671fdc3-3a69-497f-9e7b-263da0ebf289)
+
+
 ## Introduction to WebRTC Concepts
 
 The first concept to cover is the **signaling server**. It's important to note that the signaling server is not technically a part of WebRTC itself. Instead, it is an auxiliary component that helps exchange the necessary data to establish and maintain the connection. For signaling, we can use any communication method, such as **WebSocket** or **XMLHttpRequest**.
