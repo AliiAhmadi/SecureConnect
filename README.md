@@ -14,8 +14,6 @@
 
 اولین قدم برای شروع ارسال webrtc offer می باشد که در واقع شامل SDP درخواست دهنده می باشد بعد از آن جوابی که طرف مقابل باید بدهد شامل SDP خودش می باشد که بهش webrtc response می گویند. و در نهایت تماس برقرار می شود.
 
-![image](https://github.com/user-attachments/assets/1cd1f223-0142-4500-a9d7-70e28604273c)
-
 و اما همانطور که گفتیم بعضی مواقع ممکن است این ارتباط برقرار نشود به همین دلیل از TURN استفاده می کنیم.
 
 ![image](https://github.com/user-attachments/assets/476ba4be-7d7e-470e-abea-13b35c3a7200)
