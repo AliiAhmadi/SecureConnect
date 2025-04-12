@@ -1,30 +1,41 @@
 # SecureConnect
 
-# آموزش مفاهیم webrtc
-اولین جز که به آن می پردازیم signaling server است.
-در واقع signaling server ربطی به webrtc ندارد و جریی از آن به حساب نمی آید بلکه تنها فراهم کننده و کمک کننده است که دیتای مورد نیاز اولیه برای برقراری و پایداری ارتباط منتقل شود. برای signaling می توانیم از هر چیزی استفاده کنیم. ماثلا webSocket یا XMLHttpRequest.
+## Introduction to WebRTC Concepts
 
- کار STUN server این است که اطلاعات مربوط به اینترنت و مسیر اتصال ما به اینترنت و جزییات مربوط به NAT و ... را به ما بر میگرداند. قبل از برقراری ارتباط با طرف مقابل باید از STUN server این اطلاعات را بگیریم و سپس این اطلاعات را می توانیم با signaling server به طرف مقابل بدهیم.
-البته در اکثر مواقع STUN کار نخواهد کرد و باید از TURN استفاده کنیم.
+The first concept to cover is the **signaling server**. It's important to note that the signaling server is not technically a part of WebRTC itself. Instead, it is an auxiliary component that helps exchange the necessary data to establish and maintain the connection. For signaling, we can use any communication method, such as **WebSocket** or **XMLHttpRequest**.
 
-در واقع از TURN زمانی استفاده می کنیم که STUN با مشکل مواجه شود. TURN سرورها معمولا رایگان نیستند و علت آن هزینه زیادی است که به علت عبور ترافیک از آنها باید پرداخت شود. در واقع اگر ارتباط P2P نتواند برقرار شود ترافیک از طریق TURN سرور تبادل می شود.
+## STUN and TURN Servers
 
-همانطور که می دانیم برای برقراری ارتباط بین دو کلاینت به انتقال اولیه بعضی داده ها داریم. یکی از آنها SDP می باشد. (Session description protocol) در واقع شامل داده هایی می باشد که دو طرف باید از نوع مدیا هم دیگر بدانند تا بتوانند ارتباط درستی داشته باشند. SDP از طریق signaling server منتقل می شود. بعد از SDP دیتای بعدی که باید منتقل شود ICE Candidate می باشد که در واقع اطلاعات مربوط به اینترنت می باشد که از STUN گرفته می شود.
+A **STUN server** provides information about our internet connection, such as network path, NAT details, and more. Before initiating a connection with the remote peer, we first obtain this information via the STUN server. Then, we send this information to the other party using the signaling server.
 
+In many cases, STUN alone may not be sufficient. That’s where **TURN servers** come into play. TURN is used when STUN fails. Unlike STUN, TURN servers are usually not free, as they relay the actual traffic between peers and thus incur higher costs. When a direct peer-to-peer (P2P) connection is not possible, the traffic is routed through the TURN server.
 
-اولین قدم برای شروع ارسال webrtc offer می باشد که در واقع شامل SDP درخواست دهنده می باشد بعد از آن جوابی که طرف مقابل باید بدهد شامل SDP خودش می باشد که بهش webrtc response می گویند. و در نهایت تماس برقرار می شود.
+## Exchanging Connection Data
 
-و اما همانطور که گفتیم بعضی مواقع ممکن است این ارتباط برقرار نشود به همین دلیل از TURN استفاده می کنیم.
+To establish a connection between two clients, initial data needs to be exchanged. One key element is the **SDP (Session Description Protocol)**. SDP contains information about the type of media each party supports, allowing them to establish a compatible connection. This data is exchanged via the signaling server.
 
+After the SDP exchange, the next step is sending **ICE candidates**, which include network-related information obtained from the STUN server.
 
+## WebRTC Connection Flow
 
-```
+1. The initiating client sends a **WebRTC Offer**, which includes its SDP.
+2. The receiving client responds with a **WebRTC Answer**, which includes its own SDP.
+3. ICE candidates are exchanged between both clients.
+4. If a direct connection cannot be established, a TURN server is used as a fallback to relay traffic.
+
+## Creating a Self-Signed SSL Certificate
+
+To use secure WebSocket (WSS) or HTTPS in your signaling server, you need an SSL certificate. Here’s how to create a self-signed certificate:
+
+```bash
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout server.key \
     -out server.crt
 ```
 
-```
+Move the generated files to a secure location:
+
+```bash
 sudo mkdir /etc/ssl/self-signed
 sudo mv server.key /etc/ssl/self-signed/
 sudo mv server.crt /etc/ssl/self-signed/
