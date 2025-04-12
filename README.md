@@ -16,8 +16,6 @@
 
 و اما همانطور که گفتیم بعضی مواقع ممکن است این ارتباط برقرار نشود به همین دلیل از TURN استفاده می کنیم.
 
-![image](https://github.com/user-attachments/assets/476ba4be-7d7e-470e-abea-13b35c3a7200)
-
 
 
 ```
