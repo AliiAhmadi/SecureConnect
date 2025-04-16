@@ -1,7 +1,5 @@
 # SecureConnect
 
-![IMG_20250412_182248](https://github.com/user-attachments/assets/8671fdc3-3a69-497f-9e7b-263da0ebf289)
-
 
 ## Introduction to WebRTC Concepts
 
